@@ -12,9 +12,19 @@ public class Model extends Observable {
     
     int oldSecond = 0;
     
+    
+    
+        
+    
+    
+    
     public Model() {
+       
+        
+       
         update();
     }
+    
     
     public void update() {
         Calendar date = Calendar.getInstance();
