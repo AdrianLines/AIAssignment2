@@ -9,17 +9,22 @@ package clock;
 public class Alarm {
 
     protected String name;
+    protected String alarmtime;
 
-    public Alarm(String name) {
+    public Alarm(String name,String alarmtime) {
         this.name = name;
+        this.alarmtime = alarmtime;
     }
 
     public String getName() {
         return name;
     }
+    public String getAlarmtime() {
+        return alarmtime;
+    }
 
     @Override
     public String toString() {
-        return getName();
+        return getName()+", "+getAlarmtime();
     }
 }

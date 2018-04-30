@@ -9,6 +9,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,9 +26,19 @@ import javax.swing.text.DefaultCaret;
  *
  * @author 15012934
  */
-public class AddingAlarm extends javax.swing.JFrame {
+public class AddingAlarm extends javax.swing.JFrame  {
     
        public String alarmName;
+       public int alarmTime;
+       public String alarmTimeStr;
+       
+       public int hour;
+       public String hourStr;
+       public int minute;
+       public String minuteStr;
+       public int second;
+       public String ampm;
+
        
        
     
@@ -35,11 +47,41 @@ public class AddingAlarm extends javax.swing.JFrame {
      */
     public AddingAlarm() {
         initComponents();
+        
+    }
+   
+    
+    public String createTime(int hours, int minutes){
+        hour=hours;
+        minute=minutes;
+        if (hour<=9){
+             hourStr = String.valueOf(hour);
+             hourStr = 0+hourStr; 
+        }else{
+            hourStr =String.valueOf(hour);
+        }
+        
+        if(minute <= 9){
+            minuteStr = String.valueOf(minute);
+            minuteStr = 0+minuteStr; 
+        }else{
+            minuteStr =String.valueOf(minute);
+        }
+        
+        alarmTimeStr = hourStr+minuteStr;
+         alarmTime= Integer.parseInt(alarmTimeStr);
+        
+      return alarmTimeStr;
     }
     
     
     public String getAlarmName(){
         return alarmName;
+    }
+    
+    
+    public int getAlarmTime(){
+        return alarmTime;
     }
 
     /**
@@ -52,46 +94,106 @@ public class AddingAlarm extends javax.swing.JFrame {
     private void initComponents() {
 
         addAlarmbtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        addAlarmHours = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        addAlarmMinutes = new javax.swing.JTextPane();
+        HourSpin = new javax.swing.JSpinner();
+        MinuteSpin = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        AlarmNmtxt = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         addAlarmbtn.setText("Add Alarm");
+        addAlarmbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAlarmbtnActionPerformed(evt);
+            }
+        });
 
-        jScrollPane1.setViewportView(addAlarmHours);
+        HourSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        HourSpin.setAutoscrolls(true);
 
-        jScrollPane2.setViewportView(addAlarmMinutes);
+        MinuteSpin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        jLabel1.setText("Hour");
+
+        jLabel2.setText("Minute");
+
+        AlarmNmtxt.setText("New Alarm");
+        AlarmNmtxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlarmNmtxtActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Alarm Name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(42, 42, 42)
                 .addComponent(addAlarmbtn)
-                .addGap(68, 68, 68)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AlarmNmtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(HourSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(MinuteSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addAlarmbtn)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(HourSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MinuteSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AlarmNmtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addAlarmbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAlarmbtnActionPerformed
+        System.out.println("wooooowbutton pressed");    
+        hour =(Integer) HourSpin.getValue();// TODO add your handling code here:
+        
+        minute =(Integer) MinuteSpin.getValue();
+        
+        alarmName = AlarmNmtxt.getText(); 
+         
+         createTime(hour,minute);
+        System.out.println(alarmTimeStr);
+        
+        
+           try {
+               View.setNewAlarm(alarmTimeStr, alarmName);
+           } catch (QueueOverflowException ex) {
+               Logger.getLogger(AddingAlarm.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        
+       super.dispose();
+        
+    }//GEN-LAST:event_addAlarmbtnActionPerformed
+
+    private void AlarmNmtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlarmNmtxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AlarmNmtxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,10 +215,12 @@ public class AddingAlarm extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane addAlarmHours;
-    private javax.swing.JTextPane addAlarmMinutes;
+    private javax.swing.JTextField AlarmNmtxt;
+    private javax.swing.JSpinner HourSpin;
+    private javax.swing.JSpinner MinuteSpin;
     private javax.swing.JButton addAlarmbtn;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,7 +10,10 @@ import javax.swing.text.DefaultCaret;
 public class View implements Observer {
      JMenuBar menuBar;
      JMenu alarms, clock;
-     PriorityQueue<Alarm> q;
+     static PriorityQueue<Alarm> q;
+     public static int newAlarmTime;
+     public static String newAlarmTimeStr;
+     public static String newAlarmName;
    
      
      AddingAlarm newAddAlarm = new AddingAlarm();
@@ -18,7 +21,19 @@ public class View implements Observer {
      
      
      
+     
     ClockPanel panel;
+    
+    public static  void setNewAlarm(String alarmtimeString, String alarmName) throws QueueOverflowException{
+   
+        newAlarmTimeStr = alarmtimeString;
+        newAlarmName = alarmName;
+        newAlarmTime = Integer.parseInt(alarmtimeString) ;
+        
+        Alarm alarm = new Alarm(newAlarmName, newAlarmTimeStr);
+        q.add(alarm, newAlarmTime);
+        
+    }
     
     public View(Model model) {
         JFrame frame = new JFrame();
@@ -84,19 +99,13 @@ public class View implements Observer {
     
 public void addtoList() throws QueueOverflowException{
         
-        String name = "Adrian";
-        Alarm alarm = new Alarm(name);
-        String name2 = "bob";
-        Alarm alarm2 = new Alarm(name2);
-        String name3 = "third";
-        Alarm alarm3 = new Alarm(name3);
         
+      
         
 //        String name = newAddAlarm.getAlarmName();
 //        Alarm alarm = new Alarm(name);
-        q.add(alarm, 1);
-        q.add(alarm2, 3);
-        q.add(alarm3, 2);
+        
+        
     }
     
     public void listToString(){
@@ -105,5 +114,7 @@ public void addtoList() throws QueueOverflowException{
     
     public void update(Observable o, Object arg) {
         panel.repaint();
+        
+        
     }
 }

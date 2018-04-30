@@ -100,7 +100,7 @@ class LinkList{
         while(pointerLink != null){//while loop that looks for the highest priority link and removes it
             
                 
-                if(pointerLink.priority < newLink.priority){ //when the priority is the highest priority in the list
+                if(pointerLink.priority > newLink.priority){ //when the priority is the highest priority in the list
                     
       
                  
