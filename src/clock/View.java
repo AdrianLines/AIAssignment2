@@ -5,17 +5,23 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.util.Observer;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.DefaultCaret;
 
-public class View implements Observer {
+public class View<T> implements Observer {
      JMenuBar menuBar;
      JMenu alarms, clock;
      static PriorityQueue<Alarm> q;
      public static int newAlarmTime;
      public static String newAlarmTimeStr;
      public static String newAlarmName;
-   
+    
+     public String currentLinkName;
+     public String currentLinkTime;
      
+   
+     public T currentLinkT;
      AddingAlarm newAddAlarm = new AddingAlarm();
      
      
@@ -32,6 +38,28 @@ public class View implements Observer {
         
         Alarm alarm = new Alarm(newAlarmName, newAlarmTimeStr);
         q.add(alarm, newAlarmTime);
+        
+    }
+    
+    public void createMenu() throws QueueUnderflowException{
+        
+       Object currentLinkObj = q.head();
+       String currentLink = String.valueOf(currentLinkObj);
+       currentLinkName =  currentLink.split(", ")[0];
+       currentLinkTime = currentLink.split(", ")[1];
+       
+       
+       int currentLinkTimeInt = Integer.parseInt(currentLinkTime);
+       
+        currentLinkT = (T)currentLinkName;
+      Alarm firstAlarm= new Alarm(currentLinkName,currentLinkTime);
+     
+      
+      System.out.println(currentLinkTimeInt);
+       System.out.println(q.nextLink(firstAlarm, currentLinkTimeInt));
+       System.out.println(q.toString());
+        
+        
         
     }
     
@@ -70,12 +98,16 @@ public class View implements Observer {
         JButton button = new JButton(new AbstractAction("output list") {
     public void actionPerformed(ActionEvent e) {
         
-       listToString();        
+        try {        
+            listToString();
+        } catch (QueueUnderflowException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 });
         pane.add(button, BorderLayout.PAGE_START);
          
-        panel.setPreferredSize(new Dimension(200, 700));
+        panel.setPreferredSize(new Dimension(400, 500));
         pane.add(panel, BorderLayout.CENTER);
          
        
@@ -108,8 +140,8 @@ public void addtoList() throws QueueOverflowException{
         
     }
     
-    public void listToString(){
-       System.out.println(q);
+    public void listToString() throws QueueUnderflowException{
+       createMenu();
     }
     
     public void update(Observable o, Object arg) {
