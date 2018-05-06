@@ -65,5 +65,5 @@ public interface PriorityQueue<T> {
      */
     public String toString();
 
-    public T nextLink(T alarmNames, int prioritys);
+    public T nextLink(int prioritys);
 }

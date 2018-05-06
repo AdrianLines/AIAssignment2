@@ -8,7 +8,7 @@ public class Clock {
         model.addObserver(view);
         Controller controller = new Controller(model, view);
         
-        view.addtoList();
+       
         
         
         
