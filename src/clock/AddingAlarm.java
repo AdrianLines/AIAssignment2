@@ -262,6 +262,9 @@ public class AddingAlarm extends javax.swing.JFrame  {
            }
         
       addToTable(0,alarmName,alarmTimeStr);
+           
+      setVisible(false);
+          
         
     }//GEN-LAST:event_addAlarmbtnActionPerformed
 

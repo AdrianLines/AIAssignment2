@@ -75,6 +75,11 @@ public class OrderedLinkedList<T> implements PriorityQueue<T> {
     public T nextLink(int prioritys) {
             return  theLinkedList.nextLink(prioritys);
     }
+    public int nextLinkprio(int prioritys) {
+            return  theLinkedList.nextLinkInt(prioritys);
+    }
+
+    
 
     
         
@@ -89,6 +94,8 @@ class LinkList{
         firstLink = null;
         
     }
+    
+   
     
     
     /*Checks if the list is empty*/
@@ -132,6 +139,46 @@ class LinkList{
         
     }return  (T)PriorityItem;
     }
+    
+     /*returns nextLink*/
+    public int nextLinkInt(int priority){
+         OrderedLinkedList theLink = firstLink; //creates a link 
+       
+        int PriorityItemInt = 0;
+        
+        
+        
+        
+        
+        if(!isEmpty()){
+            while(theLink !=null){ //while loop to look for the highest priority link
+                if(theLink.next != null){
+                if(theLink.priority == priority){ //if the priority of theLink is the same as the highetst priority in 
+                                                    //the queue it will set the "highLink" to be the link"
+                   theLink = theLink.next;
+                     
+                     PriorityItemInt = theLink.priority;
+                     break;
+                } 
+                  
+                                      theLink = theLink.next;//sets theLink to the next one so it can run through the 
+                
+                }else{
+                     System.out.println("no next Link"); //this happens if empty
+                  return 0;  
+                }
+            }
+        }else {
+            System.out.println("Empty List"); //this happens if empty
+            return 0;
+       
+        
+    }return  PriorityItemInt;
+    }
+    
+    
+    
+    
     
     /*Inserts first Link*/
     public void insertFirstLink(T alarmName, int priority){

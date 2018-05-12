@@ -66,4 +66,5 @@ public interface PriorityQueue<T> {
     public String toString();
 
     public T nextLink(int prioritys);
+     public int nextLinkprio(int prioritys);
 }
