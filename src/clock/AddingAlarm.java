@@ -27,42 +27,38 @@ import javax.swing.text.DefaultCaret;
 /**
  *
  * @author 15012934
+ * 
+ * Class for adding alarms from a JFrame to the list
+ * this is the method that I chose to add alarms as I thought that it was neater than a dialogue box
+ * 
  */
 public class AddingAlarm extends javax.swing.JFrame  {
     
-       public String alarmName;
-       public int alarmTime;
-       public String alarmTimeStr;
-       
-       public int hour;
-       public String hourStr;
-       public int minute;
-       public String minuteStr;
-       public int second;
-       public String ampm;
+    
+    
+       /* Variables */
+       public String alarmName;     //string for alarm name
+       public int alarmTime;        //Alarm time int used for adding the priority to the list
+       public String alarmTimeStr;  //Alarm time string 24 hour format for alarm
+       public int hour;             //int gained from the hour spinner
+       public String hourStr;       //String value from hour spinner
+       public int minute;           //int value from minute spinner
+       public String minuteStr;     //String value from Minute spinner
+
        
 
        
        
     
-    /**
-     * Creates new form AddingAlarm
-     */
+    /* Constructer */
     public AddingAlarm() {
         
-        initComponents();
-        
-     
-        
-        
+        initComponents(); //initialises the components of the Jframe
+  
     }
-   public void addToTable(int position, String AlarmName, String AlarmTime){
-       
-        DefaultTableModel model = (DefaultTableModel) AlarmTables.getModel();
-        model.insertRow( position, new Object[] { AlarmName, AlarmTime });
-   }
+  
     
-    public String createTime(int hours, int minutes){
+    public String createTime(int hours, int minutes){ //Creates a String for the 24 hour Time
         hour=hours;
         minute=minutes;
         if (hour<=9){
@@ -86,12 +82,12 @@ public class AddingAlarm extends javax.swing.JFrame  {
     }
     
     
-    public String getAlarmName(){
+    public String getAlarmName(){ //returns the name of the alarm
         return alarmName;
     }
     
     
-    public int getAlarmTime(){
+    public int getAlarmTime(){ //returns the priority of the alarm
         return alarmTime;
     }
 
@@ -115,8 +111,6 @@ public class AddingAlarm extends javax.swing.JFrame  {
         AlarmNmtxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        AlarmTables = new javax.swing.JTable();
 
         jMenu1.setText("jMenu1");
 
@@ -153,76 +147,42 @@ public class AddingAlarm extends javax.swing.JFrame  {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 11, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
         );
 
-        AlarmTables.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Alarm Name", "Alarm Time"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(AlarmTables);
-        if (AlarmTables.getColumnModel().getColumnCount() > 0) {
-            AlarmTables.getColumnModel().getColumn(0).setResizable(false);
-            AlarmTables.getColumnModel().getColumn(1).setResizable(false);
-        }
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(addAlarmbtn)
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AlarmNmtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(HourSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(MinuteSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(391, 391, 391)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(391, 391, 391)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(addAlarmbtn)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AlarmNmtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(HourSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(MinuteSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -233,37 +193,29 @@ public class AddingAlarm extends javax.swing.JFrame  {
                     .addComponent(HourSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MinuteSpin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AlarmNmtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                .addGap(69, 69, 69))
+                .addGap(37, 37, 37)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addAlarmbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAlarmbtnActionPerformed
-        System.out.println("wooooowbutton pressed");    
-        hour =(Integer) HourSpin.getValue();// TODO add your handling code here:
         
-        minute =(Integer) MinuteSpin.getValue();
-        
-        alarmName = AlarmNmtxt.getText(); 
-         
-         createTime(hour,minute);
-        System.out.println(alarmTimeStr);
-        
-        
+        hour =(Integer) HourSpin.getValue();// gets the value from the hourspin and sets it to a variable    
+        minute =(Integer) MinuteSpin.getValue();//gets the value from the minute spinner and sets it to a variable
+        alarmName = AlarmNmtxt.getText(); //gets the name of the alarm from the text field
+        createTime(hour,minute); //puts the minute and hour values into the create time method
+        //Try catch to add the new alarm to the list
            try {
                View.setNewAlarm(alarmTimeStr, alarmName);
            } catch (QueueOverflowException ex) {
                Logger.getLogger(AddingAlarm.class.getName()).log(Level.SEVERE, null, ex);
            }
         
-      addToTable(0,alarmName,alarmTimeStr);
+     
            
-      setVisible(false);
+      setVisible(false); //hide the add alarm window
           
         
     }//GEN-LAST:event_addAlarmbtnActionPerformed
@@ -275,15 +227,17 @@ public class AddingAlarm extends javax.swing.JFrame  {
     /**
      * @param args the command line arguments
      */
+    
+    /* Create frame method that gets called from view to create the new add alarm frame*/ 
  public static void createFrame()
     {
         EventQueue.invokeLater(new Runnable()
         {
             @Override
-            public void run()
+            public void run() 
             {
                 
-              new AddingAlarm().setVisible(true);
+              new AddingAlarm().setVisible(true); //sets it to visible
                 
                 
             }
@@ -293,7 +247,6 @@ public class AddingAlarm extends javax.swing.JFrame  {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AlarmNmtxt;
-    private javax.swing.JTable AlarmTables;
     private javax.swing.JSpinner HourSpin;
     private javax.swing.JSpinner MinuteSpin;
     private javax.swing.JButton addAlarmbtn;
@@ -303,7 +256,6 @@ public class AddingAlarm extends javax.swing.JFrame  {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
 }

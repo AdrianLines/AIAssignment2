@@ -40,7 +40,7 @@ public interface PriorityQueue<T> {
      *
      * @throws QueueUnderflowException
      */
-    public void remove() throws QueueUnderflowException;
+    public void remove(int prioritys) throws QueueUnderflowException;
 
     /**
      * Is the queue empty?

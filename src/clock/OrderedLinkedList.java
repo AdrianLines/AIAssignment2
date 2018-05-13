@@ -59,9 +59,9 @@ public class OrderedLinkedList<T> implements PriorityQueue<T> {
 
 
     
-    public void remove() { //removes the item with the highest priority
+    public void remove(int prioritys) { //removes the item with the highest priority
         if (!theLinkedList.isEmpty()){
-        theLinkedList.removeFirst(); //runs the removeLink method
+        theLinkedList.removeLink(prioritys); //runs the removeLink method
         
         }
     }
@@ -128,7 +128,7 @@ class LinkList{
                                       theLink = theLink.next;//sets theLink to the next one so it can run through the 
                 
                 }else{
-                     System.out.println("no next Link"); //this happens if empty
+                     
                   return null;  
                 }
             }
@@ -233,16 +233,35 @@ class LinkList{
     } 
         
    /* Removes the first Link from the list*/
-    public void removeFirst(){
+   public void removeLink(int linkToBeRemoved){ //method that removes the highest priority link in the list
+        OrderedLinkedList currentLink = firstLink; //creates a new link that is used to scroll through the list
+        OrderedLinkedList previousLink = firstLink; //creates a new link that is set to be a link behind the current  link
+        int finished = 0; 
         
-                if(!isEmpty()){
-                    System.out.println("link removed");
-        firstLink = firstLink.next; //sets the second link to be the first link, removing the first link.
-    }else{
-                    System.out.println("Empty List");
-                }
+        
+        while(currentLink != null){//while loop that looks for the highest priority link and removes it
+            
                 
-               
+                if(currentLink.priority == linkToBeRemoved){ //when the priority is the highest priority in the list
+                    previousLink.next= currentLink.next; //set the previouslink.next to the currentlink.next effectively removing the link
+                    finished = 1;
+                 
+                    
+                    break; // finish the loop
+                    
+                }
+                if(finished != 1){
+                previousLink = currentLink;
+                currentLink = currentLink.next;
+            
+               }
+        }
+       
+        if(currentLink == firstLink){ //if the link is the only link in the list then set the firstlink to be the second link which is null
+            firstLink = firstLink.next;
+            
+        }
+
     }
     
     
